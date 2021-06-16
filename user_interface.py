@@ -59,6 +59,41 @@ def main():
             print(driver.current_url)
             progress.progress(q-90)
             #----------------------------------------------------
+            WAIT_ELEMENT=30
+            XPATH_VALUE= "//*[@id=\"chooseOpt\"]/div/div[4]"
+            x=WebDriverWait(driver, WAIT_ELEMENT).until(EC.presence_of_element_located((By.XPATH, XPATH_VALUE)))  
+            x.click()    
+            #----------------------------------------------------
+
+            driver.find_element_by_id("step1").click()
+            
+            #----------------------------------------------------
+            driver.find_element_by_xpath("//*[@id=\"login3Link\"]/li[5]/form/button").click()
+            #----------------------------------------------------
+            # PUTTING THE USERNAME AND PASSWORD IN GMAIL SCRIPT...
+            Phone_number=username
+            email_field = driver.find_element_by_id("identifierId")
+            email_field.send_keys(Phone_number)
+
+            email_next_button =driver.find_element_by_id("identifierNext")
+            email_next_button.click()
+            progress.progress(q-80)
+            time.sleep(5)
+
+            password_field = driver.find_element_by_name("password")
+            password_field.send_keys(password)
+
+            password_next_button = driver.find_element_by_id("passwordNext")
+            password_next_button.click()
+            
+            #----------------------------------------------------
+            # SELECT ALL RADIO BUTTONS IN THE WEBSITE
+            time.sleep(3)
+            WAIT_ELEMENT=30
+            for i in range(1,7):
+                XPATH_VALUE= f"//*[@id=\"clearData\"]/li[{i}]/span[1]/img[1]"
+                y=WebDriverWait(driver, WAIT_ELEMENT).until(EC.presence_of_element_located((By.XPATH, XPATH_VALUE)))  
+                y.click()
 
 if __name__=="__main__":
     main()
