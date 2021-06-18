@@ -94,6 +94,41 @@ def main():
                 XPATH_VALUE= f"//*[@id=\"clearData\"]/li[{i}]/span[1]/img[1]"
                 y=WebDriverWait(driver, WAIT_ELEMENT).until(EC.presence_of_element_located((By.XPATH, XPATH_VALUE)))  
                 y.click()
+            #-----------------------------------------------------
+            # SELECTING DATE
+            driver.find_element_by_xpath("//*[@id=\"to\"]/div[1]/div/input").click()
+            progress.progress(q-70)
+            todays_date = date.today()
+            clicks=(todays_date.month)-1
+            for i in range(clicks):
+                driver.find_element_by_xpath("//*[@id=\"to\"]/div[2]/div[2]/div/div/button[1]").click()
 
+            driver.find_element_by_xpath("//*[@id=\"to\"]/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div[4]").click()
+            #--------------------------------------------------------
+            driver.find_element_by_xpath("//*[@id=\"dateConfigBox\"]/div[1]/div/input").click()
+
+            driver.find_element_by_xpath("//*[@id=\"dateConfigBox\"]/div[1]/div/input").send_keys(Keys.ENTER)
+            #-------------------------------------------------------
+            driver.find_element_by_id("ok").click()
+            #------------------------------------------------------
+            # AGAIN PUTTING THE USERNAME AND PASSWORD
+            Phone_number=username
+            username_textbox= driver.find_element_by_id("email")
+            username_textbox.send_keys(Phone_number)
+            #------------------------------------------------------
+            # SOLVE THE CAPTCHA
+
+            a=driver.find_element_by_xpath("//*[@id=\"codeImg\"]/span[1]").text
+            b=driver.find_element_by_xpath("//*[@id=\"codeImg\"]/span[2]").text
+            c=driver.find_element_by_xpath("//*[@id=\"codeImg\"]/span[3]").text
+            d=driver.find_element_by_xpath("//*[@id=\"codeImg\"]/span[4]").text
+            my_string = "{}{}{}{}"
+            e=my_string.format(a,b,c,d)
+            username_textbox= driver.find_element_by_id("code")
+            username_textbox.send_keys(e)
+            x=driver.find_element_by_id("ok")
+            x.click()
+            time.sleep(6)
+            
 if __name__=="__main__":
     main()
