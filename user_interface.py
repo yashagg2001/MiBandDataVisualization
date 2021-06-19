@@ -129,6 +129,15 @@ def main():
             x=driver.find_element_by_id("ok")
             x.click()
             time.sleep(6)
+    
+    if choice=="File selector to view data":
+        import pandas as pd
+        st.set_option('deprecation.showfileUploaderEncoding',False)
+        st.title("VIEW YOUR DATA")
+        uploaded_file=st.file_uploader(label="Upload your Csv or Excel file.",type=['csv','xlsx'])
+        if uploaded_file is not None:
+            df = pd.read_csv(uploaded_file)  
+            st.write(df)
             
 if __name__=="__main__":
     main()
