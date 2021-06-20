@@ -5,7 +5,7 @@ def local_css(filename):
         st.markdown(f'<style>{f.read()}</style>',unsafe_allow_html=True)       
 local_css('style.css')
 
-components.html("<html><body><h1>VISUALIZATION OF YOUR FITNESS DATA</h1></body></html>")
+components.html("<html><body><h2>VISUALIZATION OF YOUR FITNESS DATA</h2></body></html>")
 def main():
     # MENU HAS THREE LISTS ELEMENT
     menu=["Your Latest Visualization Update","Visualize your data","File selector to view data"]
@@ -129,6 +129,36 @@ def main():
             x=driver.find_element_by_id("ok")
             x.click()
             time.sleep(6)
+            
+            # OPEN THE GMAIL
+            progress.progress(q-60)
+            driver.get('https://www.gmail.com/')
+            time.sleep(10)
+            # driver.find_element_by_class_name("y2").click()
+            driver.find_element_by_class_name("y6").click()
+            # driver.find_element_by_class_name("Zt").click()
+            time.sleep(2)
+            l=driver.find_element_by_partial_link_text("https://user.huami.com/")
+            l.click()
+            #--------------------------------------------------------------
+            driver.switch_to.window(driver.window_handles[1])
+            time.sleep(5)
+            element=driver.find_element_by_css_selector('body')
+            time.sleep(1)
+            progress.progress(q-50)
+            element.send_keys(Keys.CONTROL+'a')
+            time.sleep(1)
+            element.send_keys(Keys.CONTROL+'c')
+            time.sleep(1)
+            password_user=pyperclip.paste()[55:63]
+            st.write("Your Password for Zip file is: ")
+            st.write(password_user)
+            time.sleep(3)
+            driver.find_element_by_id("download").click()
+            time.sleep(5)
+            progress.progress(q-40)
+            st.write("Hurrah! Your data has been downloaded..")
+            driver.close()
     
     if choice=="File selector to view data":
         import pandas as pd
