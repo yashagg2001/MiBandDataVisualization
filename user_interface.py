@@ -159,6 +159,15 @@ def main():
             progress.progress(q-40)
             st.write("Hurrah! Your data has been downloaded..")
             driver.close()
+            import glob
+            import os
+            download_folder = os.path.expanduser("~")+"/Downloads/"
+            download_folder=download_folder+'*'
+            list_of_files = glob.glob(download_folder) 
+            latest_file = max(list_of_files, key=os.path.getctime)
+            latest_file=latest_file.replace('\\','\\\\\\\\')
+            latest_file=latest_file.replace('/','\\\\\\\\')
+            # st.write(latest_file) 
     
     if choice=="File selector to view data":
         import pandas as pd
