@@ -168,6 +168,50 @@ def main():
             latest_file=latest_file.replace('\\','\\\\\\\\')
             latest_file=latest_file.replace('/','\\\\\\\\')
             # st.write(latest_file) 
+
+            # RUN THE CHROME DRIVER AGAIN
+            driver=webdriver.Chrome(executable_path="C:\Program Files (x86)\chromedriver.exe")
+            # ACCESSING THE EXTRACTING WEBSITE
+            driver.get("http://online.b1.org/online")   
+            time.sleep(4)
+            x=driver.find_element_by_xpath("//*[@id=\"selectView\"]/form/div[2]/div/div/input").send_keys(latest_file)
+            time.sleep(5)
+            driver.find_element_by_xpath("//*[@id=\"passwordView\"]/div[2]/div/form/input[2]").send_keys(password_user)
+            driver.find_element_by_xpath("//*[@id=\"passwordView\"]/div[2]/div/form/input[3]").click()
+            time.sleep(5)
+            driver.find_element_by_xpath("//*[@id=\"listView\"]/div[2]/table/tbody/tr[7]/td[1]/div/a").click() #heart_rate_auto
+            driver.find_element_by_xpath("//*[@id=\"listView\"]/div[2]/table/tbody/tr/td[2]/a").click()
+            time.sleep(1)
+            driver.find_element_by_xpath("//*[@id=\"listView\"]/div[2]/div[1]/ul/li[2]/a").click()
+            time.sleep(1)
+            driver.find_element_by_xpath("//*[@id=\"listView\"]/div[2]/table/tbody/tr[1]/td[1]/div/a").click() #activity
+            time.sleep(1)
+            progress.progress(q-30)
+            driver.find_element_by_xpath("//*[@id=\"listView\"]/div[2]/table/tbody/tr/td[2]/a").click()
+            time.sleep(1)
+            driver.find_element_by_xpath("//*[@id=\"listView\"]/div[2]/div[1]/ul/li[2]/a").click() 
+            time.sleep(1)
+            driver.find_element_by_xpath("//*[@id=\"listView\"]/div[2]/table/tbody/tr[5]/td[1]/div/a").click()  #sleep
+            time.sleep(1)
+            driver.find_element_by_xpath("//*[@id=\"listView\"]/div[2]/table/tbody/tr/td[2]/a").click()
+            time.sleep(1)
+            driver.find_element_by_xpath("//*[@id=\"listView\"]/div[2]/div[1]/ul/li[2]/a").click() 
+            time.sleep(1)
+            driver.find_element_by_xpath("//*[@id=\"listView\"]/div[2]/table/tbody/tr[8]/td[1]/div").click() #user
+            time.sleep(1)
+            driver.find_element_by_xpath("//*[@id=\"listView\"]/div[2]/table/tbody/tr/td[2]/a").click()
+            time.sleep(3)
+            progress.progress(q-0)
+            
+            driver.close()
+            
+            driver.quit()
+            
+            st.balloons()
+            with st.spinner("You are almost ready"):
+                time.sleep(4)
+            st.success('Done!')
+
     
     if choice=="File selector to view data":
         import pandas as pd
