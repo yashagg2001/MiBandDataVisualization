@@ -211,7 +211,60 @@ def main():
             with st.spinner("You are almost ready"):
                 time.sleep(4)
             st.success('Done!')
-
+        
+    #---------------------------------------------------------------------------------------------------------------
+    # VISUALIZATION OF YOUR DATA
+    if choice=="Visualize your data":
+        import matplotlib.pyplot as plt
+        import pandas as pd
+        import numpy as np
+        import warnings
+        import datetime
+        import matplotlib.dates as mdates
+        warnings.filterwarnings("ignore")
+        
+        import glob
+        import os
+        import plotly.express as px
+        from plotly.subplots import make_subplots
+        import plotly.graph_objects as go
+        for p in range(1,5):
+            download_folder = os.path.expanduser("~")+"/Downloads/"
+            download_folder=download_folder+'*'
+            list_of_files = glob.glob(download_folder) # * means all if need specific format then *.csv
+            latest_file = sorted(list_of_files, key=os.path.getctime)[-p]
+            latest_file=latest_file.replace('\\','\\\\\\\\')
+            latest_file=latest_file.replace('/','\\\\\\\\')
+            # st.write(latest_file) 
+            
+            if(p==1):
+                df_user=pd.read_csv(latest_file)
+            elif(p==2):
+                df_sl=pd.read_csv(latest_file)
+                df_sl_copy=pd.read_csv(latest_file)
+            elif(p==3):
+                df_act=pd.read_csv(latest_file)
+                df_act_copy=pd.read_csv(latest_file)
+            else:
+                df_hr=pd.read_csv(latest_file)
+                df_hr_copy=pd.read_csv(latest_file)
+        #--------------------
+        user_name=df_user['nickName'][0]
+        gender= df_user['gender']
+        height=df_user['height']
+        import streamlit.components.v1 as components
+        # components.html("<html><body style='margin-top : -50px;'><h3>...Visualize your data...</h3></body></html>")
+        st.markdown(f"<h2 style='text-align:center;color:white;background-color:black;margin-bottom:25px;padding-bottom:20px;margin-top:-40px;'>WELCOME {user_name}</h2>",unsafe_allow_html=True)
+        st.markdown("***")
+        latest_date_available=pd.to_datetime(df_hr_copy["date"].iloc[-1])
+        start_date2 =pd.to_datetime(st.date_input('Pick a date for which you want to see your data', latest_date_available)).date()
+        df_hr_copy['date']=pd.to_datetime(df_hr_copy['date']).dt.date
+        df_sl_copy['date']=pd.to_datetime(df_sl_copy['date']).dt.date
+        df_act_copy['date']=pd.to_datetime(df_act_copy['date']).dt.date
+        df_hr_copy=df_hr_copy.loc[(df_hr_copy['date'] == start_date2)]
+        df_act_copy=df_act_copy.loc[(df_act_copy['date'] == start_date2)]
+        df_sl_copy=df_sl_copy.loc[(df_sl_copy['date'] == start_date2)]
+    
     
     if choice=="File selector to view data":
         import pandas as pd
