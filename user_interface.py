@@ -264,6 +264,32 @@ def main():
         df_hr_copy=df_hr_copy.loc[(df_hr_copy['date'] == start_date2)]
         df_act_copy=df_act_copy.loc[(df_act_copy['date'] == start_date2)]
         df_sl_copy=df_sl_copy.loc[(df_sl_copy['date'] == start_date2)]
+
+        col1,col2=st.beta_columns(2)
+
+        with col1:
+            # TOTAL CALORIES BURNT ON SELECTED DATE
+            document = (f'{df_act_copy["calories"].iloc[-1]} CAL')
+            st.markdown(f'<div style="margin-top:0px;background-color:#00154f;height:150px; color:white; border-radius: 12px"><div style="background-color:#636EFA; padding:5px 5px 5px 5px; text-align:center;border-radius: 12px;">TOTAL CALORIES BURNT ON {str(start_date2)} :</div><h3 style="text-align:center; font-size:50px; margin-top:-10px;">🔥{document}</h3></div>',unsafe_allow_html=True)
+            
+        #-------------------
+        with col2:
+            # AVERAGE HEART RATE ON SELECTED DATE
+            new_date=df_hr_copy['date'].iloc[-1]
+            document1=(f"{round(np.mean((df_hr_copy[df_hr_copy['date']==new_date])['heartRate']))} BPM")
+            st.markdown(f'<div style="margin-top:0px;background-color:#00154f; height:150px; color:white;border-radius: 12px;"><div style="background-color:#636EFA; padding:5px 5px 5px 5px; text-align:center;border-radius: 12px;">AVERAGE HEART RATE ON {str(start_date2)} :</div><h3 style="text-align:center; font-size:50px; margin-top:-10px;">💓{document1}</h3></div>',unsafe_allow_html=True)
+        #------------------------------------
+        #st.write(f'Total distance covered today: {(df_act["distance"].iloc[-1])/1000} KM')
+
+        # TOTAL DISTANCE COVERED ON SELECTED DATE
+        document2=(f'{(df_act_copy["distance"].iloc[-1])/1000} KM')
+        st.markdown(f'<div style="margin-top: 30px; background-color:grey; height:150px; color:white;"><div style="background-color:black; padding:5px 5px 5px 5px; text-align:center;">TOTAL DISTANCE COVERED ON {str(start_date2)} :</div><h3 style="text-align:center; font-size:50px; margin-top:-10px;">👍{document2}</h3></div>',unsafe_allow_html=True)
+
+        #---------------------------
+        # TOTAL RUN DISTANCE COVERED ON SELECTED DATE 
+        document3=(f'{(df_act_copy["runDistance"].iloc[-1])/1000} KM')
+        st.markdown(f'<div style="margin-top: 30px;margin-bottom: 30px; background-color:#9DC88D; height:150px; color:white; "><div style="background-color:#4D774E; padding:5px 5px 5px 5px;text-align:center;">TOTAL RUN DISTANCE COVERED ON {str(start_date2)} :</div><h3 style="text-align:center; font-size:50px; margin-top:-10px;">🏃‍♂️{document3}</h3></div>',unsafe_allow_html=True)
+        #------------------------------------------  
     
     
     if choice=="File selector to view data":
