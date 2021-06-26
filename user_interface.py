@@ -251,10 +251,16 @@ def main():
         #--------------------
         user_name=df_user['nickName'][0]
         gender= df_user['gender']
+        if(str(gender[0])=='1'):
+            genderval='male'
+        else:
+            genderval='female'
         height=df_user['height']
         import streamlit.components.v1 as components
         # components.html("<html><body style='margin-top : -50px;'><h3>...Visualize your data...</h3></body></html>")
         st.markdown(f"<h2 style='text-align:center;color:white;background-color:black;margin-bottom:25px;padding-bottom:20px;margin-top:-40px;'>WELCOME {user_name}</h2>",unsafe_allow_html=True)
+        # adding joeschmoe api for using avatar for the user
+        st.markdown(f"<img src='https://joeschmoe.io/api/v1/{genderval}/{user_name}' class='centerit' width='200' height='200'>",unsafe_allow_html=True)
         st.markdown("***")
         latest_date_available=pd.to_datetime(df_hr_copy["date"].iloc[-1])
         start_date2 =pd.to_datetime(st.date_input('Pick a date for which you want to see your data', latest_date_available)).date()

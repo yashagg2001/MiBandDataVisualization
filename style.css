@@ -14,6 +14,13 @@
     color: rgb(0, 0, 0);
 } */
 
+.centerit {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
+
 .mt-100 {
     margin-top: 10px;
     margin-left: 140px;
