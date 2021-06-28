@@ -297,7 +297,32 @@ def main():
         st.markdown(f'<div style="margin-top: 30px;margin-bottom: 30px; background-color:#9DC88D; height:150px; color:white; "><div style="background-color:#4D774E; padding:5px 5px 5px 5px;text-align:center;">TOTAL RUN DISTANCE COVERED ON {str(start_date2)} :</div><h3 style="text-align:center; font-size:50px; margin-top:-10px;">🏃‍♂️{document3}</h3></div>',unsafe_allow_html=True)
         #------------------------------------------  
     
-    
+        #------------------------------------------
+        #                                                   Steps related code
+        st.markdown(f'<div><h2 style="color:#636EFA;text-align:center;"><b>YOUR TOTAL STEPS ON {str(start_date2)} IS :</b></h2></div>',unsafe_allow_html=True)
+        todaydate= df_act_copy['date'].iloc[-1]
+        todaysteps= df_act_copy['steps'].iloc[-1]
+        document10= (f'{todaysteps}')
+        a=st.text_input("Enter your steps goal here:",value="10000")
+        per=f'{(int(todaysteps)*100)/int(a) }%'
+        if(int(todaysteps)>int(a)):
+            per=f'{100}%'
+        st.markdown(f'<h2 style="margin-left:190px">Steps&emsp;&emsp;&emsp;&emsp;&ensp;Goal %</h2><div class="row d-flex justify-content-center mt-100"><div class="col-md-6"><div class="progress blue"> <span class="progress-left"> <span class="progress-bar"></span> </span> <span class="progress-right"> <span class="progress-bar"></span> </span><div class="progress-value">{document10}</div></div><div class="progress yellow"> <span class="progress-left"> <span class="progress-bar"></span> </span> <span class="progress-right"> <span class="progress-bar"></span> </span><div class="progress-value">{per}</div></div></div></div>',unsafe_allow_html=True)
+        
+        # -------------------------------------------
+        # YOUR HEART VISUALIZATION ON SELECTED DATE
+        import altair as alt
+        df_hr_date=(df_hr_copy[df_hr_copy['date']==new_date])
+        c2 = alt.Chart(df_hr_date).mark_line().encode(x="time", y="heartRate").configure_axisX(labelAngle=45)
+        st.markdown(f'<div><h2 style="color:#e81a2b;text-align:center;"><b>💝&nbsp;YOUR HEART RATE VISUALIZATION ON <BR>{str(start_date2)} IS :</b></h2></div>',    unsafe_allow_html=True)
+        st.altair_chart(c2)
+
+        # YOUR WHOLE HEART VISUALIZATION
+        c1 = alt.Chart(df_hr).mark_line().encode(x="time", y="heartRate").configure_axisX(labelAngle=45)
+        st.markdown(f'<div><h2 style="color:#e81a2b;text-align:center;"><b>💝&nbsp;YOUR WHOLE HEART RATE VISUALIZTION</b></h2></div>',    unsafe_allow_html=True)
+        st.altair_chart(c1)
+
+        #-------------------------------------
     if choice=="File selector to view data":
         import pandas as pd
         st.set_option('deprecation.showfileUploaderEncoding',False)
