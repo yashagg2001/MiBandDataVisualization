@@ -323,6 +323,38 @@ def main():
         st.altair_chart(c1)
 
         #-------------------------------------
+        # PEAK DETECTION OF HEART RATE
+        st.markdown(f'<div><h2 style="color:black;text-align:center;"><b>PEAK DETECTION OF YOUR HEART RATE<br> ON {str(start_date2)} :</b></h2></div>',    unsafe_allow_html=True)
+        df_myhr=df_hr_copy.copy()
+        from scipy.signal import find_peaks
+
+        #defining the x and y arrays
+        x = [i for i in range(len(df_myhr))]
+        x=np.array(x)
+        y = np.array(df_myhr['heartRate'])
+
+        #Find peaks
+        peaks = find_peaks(y, height = 1, threshold = 1, distance = 1)
+        height = peaks[1]['peak_heights'] #list of the heights of the peaks
+        peak_pos = x[peaks[0]] #list of the peaks positions
+
+        #Finding the minima
+        y2 = y*-1
+        minima = find_peaks(y2)
+        min_pos = x[minima[0]] #list of the minima positions
+        min_height = y2[minima[0]] #list of the mirrored minima heights
+
+        #Plotting
+        fig = plt.figure()
+        ax = fig.subplots()
+        ax.plot(x,y)
+        ax.scatter(peak_pos, height, color = 'r', s = 15, marker = 'D', label = 'Maxima')
+        ax.scatter(min_pos, min_height*-1, color = 'gold', s = 15, marker = 'X', label = 'Minima')
+        ax.legend()
+        ax.grid()
+        st.set_option('deprecation.showPyplotGlobalUse', False)
+        st.pyplot()
+
     if choice=="File selector to view data":
         import pandas as pd
         st.set_option('deprecation.showfileUploaderEncoding',False)
