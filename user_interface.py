@@ -355,6 +355,53 @@ def main():
         st.set_option('deprecation.showPyplotGlobalUse', False)
         st.pyplot()
 
+        # YOUR SLEEP DATA sELECTED DATE AND TODAY BY RADIO BUTTONS
+
+        st.markdown(f'<div><h2 style="color:#636EFA;text-align:center;"><b>YOUR SLEEP DATA</b></h2></div>',unsafe_allow_html=True)
+        list_names=["Not Selected",f"Your {str(start_date2)}'s sleep data","Your today's sleep data"]
+        page=st.radio("Please select an option",list_names)
+        if page=="Not Selected":
+            st.warning("Select any option above...")
+        elif(page=="Your today's sleep data"):
+            s1,s2,s3=st.beta_columns(3)
+            with s1:
+                document4=(f'{(df_sl["deepSleepTime"].iloc[-1])//60} hrs and {(df_sl["deepSleepTime"].iloc[-1])-((df_sl["deepSleepTime"].iloc[-1])//60)*60} minutes')
+                st.markdown(f'<div style="margin-top: 30px;margin-bottom: 30px; background-color:grey; height:150px; color:white;"><div style="background-color:black; padding:5px 5px 5px 5px;text-align:center;">Deep Sleep Time:</div><h3 style="text-align:center; font-size:30px; margin-top:-4px;">😴{document4}</h3></div>',unsafe_allow_html=True)
+
+            with s2:
+                document5=(f'{(df_sl["shallowSleepTime"].iloc[-1])//60} hrs and {(df_sl["shallowSleepTime"].iloc[-1])-((df_sl["shallowSleepTime"].iloc[-1])//60)*60} minutes')
+                st.markdown(f'<div style="margin-top: 30px;margin-bottom: 30px; background-color:grey; height:150px; color:white; "><div style="background-color:black; padding:5px 5px 5px 5px; text-align:center;">Shallow Sleep Time:</div><h3 style="text-align:center; font-size:30px; margin-top:-4px;">⏱️{document5}</h3></div>',unsafe_allow_html=True)
+            with s3:
+                document6=(f'{(df_sl["wakeTime"].iloc[-1])//60} hrs and {(df_sl["wakeTime"].iloc[-1])-((df_sl["wakeTime"].iloc[-1])//60)*60} minutes')
+                st.markdown(f'<div style="margin-top: 30px;margin-bottom: 30px; background-color:grey; height:150px; color:white; "><div style="background-color:black; padding:5px 5px 5px 5px; text-align:center;">Wake time:</div><h3 style="text-align:center; font-size:30px; margin-top:-4px;">💁‍♀️{document6}</h3></div>',unsafe_allow_html=True)
+            
+            # Your today Sleep Visualization
+            st.markdown(f'<div><h2 style="color:#636EFA;text-align:center;"><b>YOUR TODAY\'S SLEEP VISUALIZATION</b></h2></div>',     unsafe_allow_html=True)
+            ts=df_sl['deepSleepTime'].iloc[-1]+df_sl['shallowSleepTime'].iloc[-1]+df_sl['wakeTime'].iloc[-1]
+            fig = px.pie(df_sl, values=[(df_sl['deepSleepTime'].iloc[-1]*100)/ts,(df_sl['shallowSleepTime'].iloc[-1]*100)/ts,(df_sl   ['wakeTime'].iloc[-1]*100)/ts], names=['Deep Sleep','Shallow Sleep', 'Wake Time'], title='Sleep Monitor')
+            st.plotly_chart(fig)
+
+        else:
+            s1,s2,s3=st.beta_columns(3)
+            with s1:
+                document7=(f'{(df_sl_copy["deepSleepTime"].iloc[-1])//60} hrs and {(df_sl_copy["deepSleepTime"].iloc[-1])-((df_sl_copy["deepSleepTime"].iloc[-1])//60)*60} minutes')
+                st.markdown(f'<div style="margin-top: 30px;margin-bottom: 30px; background-color:black; height:150px; color:white;"><div style="background-color:grey; padding:5px 5px 5px 5px;text-align:center;">Deep Sleep Time:</div><h3 style="text-align:center; font-size:30px; margin-top:-4px;">😴{document7}</h3></div>',unsafe_allow_html=True)
+
+            with s2:
+                document8=(f'{(df_sl_copy["shallowSleepTime"].iloc[-1])//60} hrs and {(df_sl_copy["shallowSleepTime"].iloc[-1])-((df_sl_copy["shallowSleepTime"].iloc[-1])//60)*60} minutes')
+                st.markdown(f'<div style="margin-top: 30px;margin-bottom: 30px; background-color:black; height:150px; color:white; "><div style="background-color:grey; padding:5px 5px 5px 5px; text-align:center;">Shallow Sleep Time:</div><h3 style="text-align:center; font-size:30px; margin-top:-4px;">⏱️{document8}</h3></div>',unsafe_allow_html=True)
+            with s3:
+                document9=(f'{(df_sl_copy["wakeTime"].iloc[-1])//60} hrs and {(df_sl_copy["wakeTime"].iloc[-1])-((df_sl_copy["wakeTime"].iloc[-1])//60)*60} minutes')
+                st.markdown(f'<div style="margin-top: 30px;margin-bottom: 30px; background-color:black; height:150px; color:white; "><div style="background-color:grey; padding:5px 5px 5px 5px; text-align:center;">Wake time:</div><h3 style="text-align:center; font-size:30px; margin-top:-4px;">💁‍♀️{document9}</h3></div>',unsafe_allow_html=True)
+            
+            # Your SELECTED DATE Sleep Visualization
+            st.markdown(f'<div><h2 style="color:#636EFA;text-align:center;"><b>YOUR {str(start_date2)}\'S SLEEP VISUALIZATION</b></h2></div>',     unsafe_allow_html=True)
+            ts=df_sl_copy['deepSleepTime'].iloc[-1]+df_sl_copy['shallowSleepTime'].iloc[-1]+df_sl_copy['wakeTime'].iloc[-1]
+            fig = px.pie(df_sl_copy, values=[(df_sl_copy['deepSleepTime'].iloc[-1]*100)/ts,(df_sl_copy['shallowSleepTime'].iloc[-1]*100)/ts,(df_sl_copy['wakeTime'].iloc[-1]*100)/ts], names=['Deep Sleep','Shallow Sleep', 'Wake Time'], title='Sleep Monitor')
+            st.plotly_chart(fig)
+
+        #----------------------------------
+            
     if choice=="File selector to view data":
         import pandas as pd
         st.set_option('deprecation.showfileUploaderEncoding',False)
