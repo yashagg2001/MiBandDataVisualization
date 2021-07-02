@@ -401,6 +401,35 @@ def main():
             st.plotly_chart(fig)
 
         #----------------------------------
+        # ALL THREE BETA EXPANDERS
+        
+        with st.beta_expander("VISUALIZE YOUR CALORIES "):
+            G1,G2=st.beta_columns(2)
+            with G1:
+                bars = alt.Chart(df_act).mark_bar().encode(x="calories", y="date")
+                text = bars.mark_text(align='left', baseline='middle').encode( text='calories')
+                (bars + text).properties(height=900)
+                st.altair_chart(bars+text)
+            with G2:
+                cha3 = alt.Chart(df_act).mark_point().encode(x="distance", y="calories").configure_axisX(labelAngle=45)
+                st.altair_chart(cha3)
+        with st.beta_expander("VISUALIZE YOUR DATE VS DISTANCE"):
+            cha = alt.Chart(df_act).mark_bar().encode(x="date", y="distance").configure_axisX(labelAngle=45)
+            st.altair_chart(cha.properties(height=500,width=700))
+
+        with st.beta_expander("VISUALIZE YOUR DATE VS DISTANCE"):
+            cha2 = alt.Chart(df_act).mark_bar().encode(x="date", y="steps").configure_axisX(labelAngle=90)
+            st.altair_chart(cha2)
+        
+        #------------------------------------
+        # STATISTICAL ANALYSIS OF YOUR STEPS DISTANCE AND CALORIES
+        st.markdown("***")
+        st.markdown(f'<div><h2 style="color:GREY;text-align:center;"><b>STATISTICAL ANALYSIS</b></h2></div>',unsafe_allow_html=True)
+        st.markdown("***")
+        st.write(df_act[["steps", "distance","calories"]].describe())
+        
+        #-----------------------------------------------------      
+
             
     if choice=="File selector to view data":
         import pandas as pd
