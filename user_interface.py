@@ -428,7 +428,75 @@ def main():
         st.markdown("***")
         st.write(df_act[["steps", "distance","calories"]].describe())
         
-        #-----------------------------------------------------      
+        #----------------------------------------------------- 
+        #heart rate prediction
+
+        st.markdown("***")
+        st.markdown(f'<div><h2 style="color:GREY;text-align:center;"><b>VISUALIZE YOUR HEARTRATE FOR A SELECTED RANGE</b></h2></div>',unsafe_allow_html=True)
+        st.markdown("***")
+        today = datetime.date.today()
+        tomorrow = today + datetime.timedelta(days=1)
+        start_date =pd.to_datetime(st.date_input('Start date', today)).date()
+        end_date =pd.to_datetime(st.date_input('End date', tomorrow)).date()
+        df_hr2=df_hr.copy()
+        if start_date <= end_date:
+            df_hr['time']=df_hr['date']+' '+df_hr['time']
+            df_hr['date']=pd.to_datetime(df_hr['date']).dt.date
+            mask = (df_hr['date'] >= start_date) & (df_hr['date'] <= end_date)
+            df_hr = df_hr.loc[mask]
+            st.markdown("***")
+            st.write("Statistical analysis of your heart rate for the selected range")
+            st.write(df_hr[["heartRate"]].describe())
+            st.markdown("***")
+            df_hr['time']=pd.to_datetime(df_hr['time'])
+            df_hr.drop(['date'],axis='columns',inplace=True)
+            st.write(df_hr)
+        else:
+            st.error('Error: End date must fall after start date.')
+        
+
+        # PLOTTING THE IMPORTANT FEATURES
+        fig,ax=plt.subplots(figsize=(15,8))
+        plt.plot(df_hr['time'],df_hr['heartRate'])
+        xfmt=mdates.DateFormatter(' %d-%m-%y %H:%M')
+        ax.xaxis.set_major_formatter(xfmt)
+        plt.grid()
+        st.set_option('deprecation.showPyplotGlobalUse', False)
+        st.pyplot()
+
+        df_hr['heart_pct']=df_hr['heartRate'].pct_change().rolling(window=10).mean().values
+        fig,ax=plt.subplots(figsize=(15,8))
+        plt.plot(df_hr['time'],df_hr['heart_pct'])
+        myfmt=mdates.DateFormatter('%H:%M')
+        ax.xaxis.set_major_formatter(myfmt)
+        plt.grid()
+        st.set_option('deprecation.showPyplotGlobalUse', False)
+        st.pyplot()
+
+        df_hr['heart_ma']=df_hr['heartRate'].rolling(window=500).mean().values
+        fig,ax=plt.subplots(figsize=(16,8))
+        plt.plot(df_hr['time'],df_hr['heartRate'],'-r',label='Heart Rate')
+        plt.plot(df_hr['time'],df_hr['heart_ma'].rolling(window=500).mean().values,'c',label='DIFF')
+        plt.legend()
+        plt.grid()
+        st.set_option('deprecation.showPyplotGlobalUse', False)
+        st.pyplot()
+
+        fig,ax=plt.subplots(figsize=(16,8))
+        plt.plot(df_hr['time'],df_hr['heartRate'],'-r',label='Heart Rate')
+        plt.legend()
+        plt.grid()
+        ax.tick_params('x',colors='r')
+        ax2=ax.twinx()
+        plt.plot(df_hr['time'],df_hr['heart_ma'].rolling(window=1000).mean().values,'c',label='DIFF')
+        plt.legend()
+        ax2.tick_params('x',colors='b')
+        myFmt=mdates.DateFormatter('%H:%M')
+        ax2.xaxis.set_major_formatter(myFmt)
+        st.set_option('deprecation.showPyplotGlobalUse', False)
+        st.pyplot()
+
+        #-------------------------------------------------------------     
 
             
     if choice=="File selector to view data":
