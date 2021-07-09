@@ -6,7 +6,7 @@ This project is about the real extraction of Data from MI Fitness Band using sel
 1. Check your chrome version : `Open chrome > At the top right, look at More > Click Help > About Chrome.`
 2. Go to `https://chromedriver.chromium.org/downloads` and download suitable chrome driver according to your chrome version.
 3. Move the downloaded driver to `C:\Program Files (x86)`
-4. Clone This Project: `git clone https://github.com/yashagg2001/MIBandDataVisualization.git`
+4. Clone This Project: `git clone https://github.com/yashagg2001/MiBandDataVisualization.git`
 5. Go to Project Directory: `cd MIBandDataVisualization`
 6. Create a Virtual Environment: `python -m venv miui` (for windows)
 7. Activate Virtual Environment: `miui\Scripts\activate.bat` (for windows)
