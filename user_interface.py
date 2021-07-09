@@ -496,7 +496,21 @@ def main():
         st.set_option('deprecation.showPyplotGlobalUse', False)
         st.pyplot()
 
-        #-------------------------------------------------------------     
+        #-------------------------------------------------------------  
+        # SMS SERVICES
+        st.sidebar.markdown(f"Want the visualization of {start_date2} on your smartphone via SMS ??")
+        yesorno=["YES","NO"]
+        selectedoption=st.sidebar.radio("Please select an option",yesorno,index=1)
+        
+        if selectedoption=="YES":
+            m_no=st.sidebar.text_input("Enter your mobile no. (with country code)")
+            from twilio.rest import Client
+            account_sid="AC9ad4a9800ba3add42334f099a42df9b7"
+            auth_token="fbb0c6ff23501177159e7158d2eae335"
+            client=Client(account_sid,auth_token)
+            client.messages.create(from_="12094415159",body=f"Hii {user_name}, Your data visualisation of {start_date2} is as follows: (1) Avg. Heart Rate : {round(np.mean((df_hr_copy[df_hr_copy['date']==new_date])['heartRate']))} BPM.  (2) Total Calories Burnt : {df_act_copy['calories'].iloc[-1]} CAL. (3) Total Distance Covered : {(df_act_copy['distance'].iloc[-1])/1000} KM. (4) Total steps taken : {df_act_copy['steps'].iloc[-1]}", to=f"{m_no}")
+        elif selectedoption=="NO":
+            st.sidebar.text("Thank you for using our webapp")   
 
             
     if choice=="File selector to view data":
