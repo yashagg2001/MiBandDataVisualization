@@ -1,42 +1,42 @@
 # MiBandDataVisualization
-This project is about the real extraction of Data from MI Fitness Band using selenium and applying some automization and visualization on real data such as your health monitoring.<br>
+This project is about the real extraction of Data from MI Fitness Band using selenium and applying some anatomization and visualization on real data such as your health monitoring.<br>
 `Note: Make sure that while using our web app, you put your business or educational email id which is attached to your MI Fit App on your smartphone.`
 
 ### Languages Used:
-  1.Python
+  `1. Python`
   
-  2.HTML/CSS
+  `2. HTML/CSS`
   
 ### Python Libraries/ Framework used:
-  1.STREAMIT
+  `1. Streamlit`
   
-  2.SELENIUM
+  `2. Selenium`
   
-  3.ALTAIR
+  `3. Altair`
   
-  4.AUTOVIZ
+  `4. Autoviz`
   
-  5.MATPLOTLIB
+  `5. Matplotlib`
   
-  6.NUMPY
+  `6. Numpy`
   
-  7.PANDAS
+  `7. Pandas`
   
-  8.PLOTLY
+  `8. Plotly`
   
-  9.PYPERCLIP
+  `9. Pyperclip`
   
-  10.SCIKIT-LEARN
+  `10. Scikit-Learn`
   
-  11.SCIPY
+  `11. Scipy`
   
-  12.SEABORN
+  `12. Seaborn`
   
-  13.SKLEARN
+  `13. Sklearn`
   
-  14.STATSMODELS
+  `14. Statsmodels`
   
-  15.TWILIO
+  `15. Twilio`
   
 # How to run this analysis in your local machine
 1. Check your chrome version : `Open chrome > At the top right, look at More > Click Help > About Chrome.`
