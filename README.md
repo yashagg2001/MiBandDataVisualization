@@ -4,6 +4,7 @@ This project is about the real extraction of Data from MI Fitness Band using sel
 
 <kbd><img src="images/1.PNG" width="900"></kbd><br><br>
 <kbd><img src="images/2.PNG" width="900"></kbd><br><br>
+<kbd><img src="images/3.PNG" width="900"></kbd><br><br>
 <kbd><img src="images/4.PNG" width="900"></kbd><br><br>
 <kbd><img src="images/5.PNG" width="900"></kbd><br><br>
 <kbd><img src="images/6.PNG" width="900"></kbd><br><br>
