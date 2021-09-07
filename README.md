@@ -1,7 +1,14 @@
 # MiBandDataVisualization
 This project is about the real extraction of Data from MI Fitness Band using selenium and applying some anatomization and visualization on real data such as your health monitoring.<br>
-`Note: Make sure that while using our web app, you put your business or educational email id which is attached to your MI Fit App on your smartphone.`
+`Note: Make sure that while using our web app, you put your business or educational email id which is attached to your MI Fit App on your smartphone.`<br><br>
 
+<kbd><img src="images/1.PNG" width="900"></kbd><br><br>
+<kbd><img src="images/2.PNG" width="900"></kbd><br><br>
+<kbd><img src="images/4.PNG" width="900"></kbd><br><br>
+<kbd><img src="images/5.PNG" width="900"></kbd><br><br>
+<kbd><img src="images/6.PNG" width="900"></kbd><br><br>
+<kbd><img src="images/7.PNG" width="900"></kbd><br><br>
+<kbd><img src="images/8.PNG" width="900"></kbd><br>
 
 ### Languages Used:
   `1. Python`
