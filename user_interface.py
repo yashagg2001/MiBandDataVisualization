@@ -68,7 +68,7 @@ def main():
             driver.find_element_by_id("step1").click()
             
             #----------------------------------------------------
-            driver.find_element_by_xpath("//*[@id=\"login3Link\"]/li[5]/form/button").click()
+            driver.find_element_by_xpath("//*[@id=\"login3Link\"]/li[4]/form/button").click()
             #----------------------------------------------------
             # PUTTING THE USERNAME AND PASSWORD IN GMAIL SCRIPT...
             Phone_number=username
